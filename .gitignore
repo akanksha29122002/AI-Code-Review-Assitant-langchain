@@ -1,0 +1,13 @@
+.env
+__pycache__/
+*.pyc
+.streamlit/
+!.streamlit/secrets.toml.example
+.pytest_cache/
+.venv/
+venv/
+data/
+.vercel/
+.vercel-deploy/
+tmpltja_s2a/
+tmpyq3i6i_3/

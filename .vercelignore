@@ -1,0 +1,13 @@
+.env
+.git
+.pytest_cache
+.streamlit/secrets.toml
+__pycache__
+*.pyc
+data
+tests
+AI_Code_Review_Assistant.pptx
+AI_Code_Review_Assistant_Presentation.pptx
+PRESENTATION_OUTLINE.txt
+tmpltja_s2a
+tmpyq3i6i_3

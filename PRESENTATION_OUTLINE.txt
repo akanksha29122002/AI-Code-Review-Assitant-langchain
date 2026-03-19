@@ -1,0 +1,86 @@
+AI-Powered Code Review Assistant
+
+Slide 1: Title
+- AI-Powered Code Review Assistant
+- Manual review + GitHub PR review in one application
+
+Slide 2: Problem Statement
+- Developers need faster feedback on correctness, security, testing gaps, and maintainability risks.
+- Manual review is time-consuming and inconsistent across diffs, snippets, and pull requests.
+- The goal was to create one app that supports both manual review and GitHub-based review workflows.
+
+Slide 3: Solution Overview
+- Manual review tab for pasted diffs, patches, or code
+- GitHub PR review tab inside the same Streamlit app
+- FastAPI webhook endpoint for PR-triggered review
+- Review history stored in SQLite
+- Repository context retrieval
+- Structured findings, risk, and missing tests output
+- Fallback local reviewer when model calls fail
+
+Slide 4: Architecture
+- Streamlit app (`app.py`) handles manual reviews and GitHub PR review preview/publish flows.
+- FastAPI service (`webhook_app.py`) handles GitHub webhook events.
+- Review engine (`reviewer.py`) builds the LangChain prompt pipeline and structured output.
+- GitHub service layer fetches PR files and posts results.
+- SQLite stores recent review results.
+
+Slide 5: How LangChain Was Used
+- LangChain structures the review pipeline through a system prompt and user prompt.
+- The prompt injects repository context, retrieved files, changed file summary, and code/diff.
+- Structured output maps the model response into summary, risk, findings, and missing tests.
+- Main files:
+  - `src/code_review_assistant/reviewer.py`
+  - `src/code_review_assistant/models.py`
+
+Slide 6: Key Files
+- `app.py` -> Streamlit UI
+- `webhook_app.py` -> FastAPI webhook server
+- `src/code_review_assistant/reviewer.py` -> LangChain review orchestration
+- `src/code_review_assistant/github_review.py` -> GitHub PR workflow
+- `src/code_review_assistant/repository_context.py` -> repository retrieval
+- `src/code_review_assistant/fallback_reviewer.py` -> local offline review path
+
+Slide 7: Fallback Review Mode
+- Added because Gemini quota/billing was unavailable.
+- Handles:
+  - hardcoded secrets
+  - debug statements
+  - broad exceptions
+  - likely missing semicolons in C-like languages
+  - missing test reminders
+- Keeps the app usable for demo and learning.
+
+Slide 8: How To Run
+- `pip install -r requirements.txt`
+- `copy .env.example .env`
+- Update `.env` with provider and GitHub credentials
+- `streamlit run app.py`
+- Optional webhook mode:
+  - `uvicorn webhook_app:app --reload --port 8000`
+
+Slide 9: Demo Flow
+- Manual Review:
+  - paste code or diff
+  - set primary language
+  - run review
+- GitHub PR Review:
+  - enter owner, repository, and PR number
+  - use preview mode if posting is not needed
+- Show review history in the UI
+
+Slide 10: Challenges And Limitations
+- Gemini quota/billing was unavailable
+- GitHub posting depends on token/app permissions
+- Fallback review is narrower than full LLM review
+
+Slide 11: Testing And Validation
+- Tests cover parser logic, GitHub review helpers, webhook verification, deduplication, repository context, and fallback review.
+- Final validation: all tests pass
+- App supports manual review, GitHub PR preview review, and webhook-based review flow
+
+Slide 12: Conclusion
+- The project delivers a unified code review assistant for manual and GitHub PR workflows.
+- LangChain was used for prompt orchestration and structured output.
+- A fallback engine was added to keep the application functional under provider limitations.
+- The project is runnable, tested, and ready for demonstration.
