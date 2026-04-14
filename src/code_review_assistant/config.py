@@ -32,6 +32,12 @@ def optional_secret(name: str) -> str | None:
     return value
 
 
+def default_runtime_path(filename: str) -> str:
+    if os.getenv("VERCEL"):
+        return f"/tmp/{filename}"
+    return f"data/{filename}"
+
+
 class Settings:
     """Runtime settings sourced from environment variables."""
 
@@ -54,8 +60,14 @@ class Settings:
     github_app_id: str | None = optional_secret("GITHUB_APP_ID")
     github_installation_id: str | None = optional_secret("GITHUB_INSTALLATION_ID")
     github_private_key_path: str | None = optional_secret("GITHUB_PRIVATE_KEY_PATH")
-    review_history_db_path: str = os.getenv("REVIEW_HISTORY_DB_PATH", "data/review_history.db")
-    repository_index_path: str = os.getenv("REPOSITORY_INDEX_PATH", "data/repository_index.json")
+    review_history_db_path: str = os.getenv(
+        "REVIEW_HISTORY_DB_PATH",
+        default_runtime_path("review_history.db"),
+    )
+    repository_index_path: str = os.getenv(
+        "REPOSITORY_INDEX_PATH",
+        default_runtime_path("repository_index.json"),
+    )
 
     @property
     def github_private_key(self) -> str | None:

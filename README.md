@@ -340,6 +340,7 @@ This project can be deployed for free with a split setup:
 
 - deploy the FastAPI webhook service to Vercel
 - deploy the Streamlit UI to Streamlit Community Cloud
+- Vercel also serves a lightweight public demo page at `/` with a diff textarea backed by the same review engine
 
 Why split it:
 
@@ -349,7 +350,7 @@ Why split it:
 Files added for Vercel:
 
 - [`api/index.py`](api/index.py) exposes the FastAPI webhook app
-- [`vercel.json`](vercel.json) rewrites `/health` and `/github/webhook` to the Vercel Python function
+- [`vercel.json`](vercel.json) rewrites `/`, `/review`, `/health`, and `/github/webhook` to the Vercel Python function
 - [`.python-version`](.python-version) pins the Python version Vercel should use
 - [`.vercelignore`](.vercelignore) excludes local data, secrets, tests, and presentation files from uploads
 - [`.streamlit/secrets.toml.example`](.streamlit/secrets.toml.example) provides a template for Streamlit Community Cloud secrets
