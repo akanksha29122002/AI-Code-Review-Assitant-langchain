@@ -1,0 +1,21 @@
+diff --git a/src/payments.py b/src/payments.py
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/src/payments.py
+@@ -0,0 +1,15 @@
++import os
++
++
++API_KEY = "sk_live_demo_key_do_not_commit"
++
++
++def charge_customer(customer_id, amount):
++    print("charging customer", customer_id)
++    try:
++        if amount <= 0:
++            return {"ok": False}
++        token = API_KEY
++        return {"ok": True, "token": token}
++    except Exception:
++        return {"ok": False}

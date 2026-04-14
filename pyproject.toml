@@ -1,0 +1,35 @@
+[project]
+name = "ai-code-review-assistant-langchain"
+version = "0.1.0"
+description = "AI-assisted code review app with Streamlit, FastAPI, LangChain, GitHub PR integration, and local fallback review."
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+  { name = "Akanksha Kumari" }
+]
+dependencies = [
+  "streamlit>=1.43.0",
+  "langchain>=0.3.21",
+  "langchain-openai>=0.3.8",
+  "langchain-ollama>=0.3.3",
+  "langchain-google-genai>=2.1.5",
+  "python-dotenv>=1.0.1",
+  "pydantic>=2.10.6",
+  "fastapi>=0.115.12",
+  "uvicorn>=0.34.0",
+  "requests>=2.32.3",
+  "PyJWT[crypto]>=2.10.1"
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.3.5"
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"

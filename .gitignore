@@ -1,12 +1,14 @@
 .env
 __pycache__/
 *.pyc
-.streamlit/
+.streamlit/*
 !.streamlit/secrets.toml.example
 .pytest_cache/
+pytest-cache-files-*/
 .venv/
 venv/
 data/
+streamlit.*.log
 .vercel/
 .vercel-deploy/
 tmpltja_s2a/

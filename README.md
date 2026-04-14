@@ -1,6 +1,6 @@
 # AI-Powered Code Review Assistant
 
-This project is a fuller starter project for reviewing code changes with LangChain and an LLM. It includes:
+This project is a portfolio-ready assistant for reviewing code changes with LangChain and an LLM. It includes:
 
 - a Streamlit UI for manual reviews
 - a FastAPI webhook service for GitHub pull request reviews
@@ -12,6 +12,7 @@ This project is a fuller starter project for reviewing code changes with LangCha
 - Gemini API support
 - free local-model support through Ollama
 - a built-in local fallback reviewer when the external model is unavailable
+- a no-key demo script and sample patch for reliable walkthroughs
 - tests for diff parsing, webhook verification, inline comment mapping, fallback review, and history persistence
 
 ## What it does
@@ -255,6 +256,21 @@ streamlit run app.py
 3. Set `Primary language` correctly before running the review.
 4. For GitHub review, use an existing pull request in the `GitHub PR Review` tab.
 5. Leave `Publish review back to GitHub` off if you only want a preview in the app.
+
+### No-key demo
+
+Use this command when you want a recruiter-safe demo without API keys, billing, or GitHub permissions:
+
+```bash
+python scripts/demo_review.py
+```
+
+It reviews [`examples/demo_diff.patch`](examples/demo_diff.patch) with the local fallback reviewer and prints:
+
+- a summary
+- overall risk
+- findings with file/line references
+- missing-test recommendations
 
 ## One-command startup
 
